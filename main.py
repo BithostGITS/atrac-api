@@ -84,4 +84,4 @@ def decode_atrac(background_tasks: BackgroundTasks, file: UploadFile = File()):
       output])
     background_tasks.add_task(remove_file, output, logger)
     return FileResponse(path=output, filename=Path(filename).stem + '.wav', media_type='audio/wav')
- '-ar', '44100',
+  
