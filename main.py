@@ -52,7 +52,7 @@ def transcode_atrac(type: atracTypes, background_tasks: BackgroundTasks, applyRe
   elif applyReplaygain:
     transcoderCommands.append('-af')
     transcoderCommands.append('volume=replaygain=track')
-  transcoderCommands += ['-ac', '2', '-ar', '44100', '-f', 'wav']
+  transcoderCommands += ['-ac', '2', '-ar', '44100', '-resampler', 'soxr', '-f', 'wav']
 
   intermediary = Path(gettempdir(), str(uuid4())).absolute()
   with NamedTemporaryFile() as input:
@@ -84,3 +84,4 @@ def decode_atrac(background_tasks: BackgroundTasks, file: UploadFile = File()):
       output])
     background_tasks.add_task(remove_file, output, logger)
     return FileResponse(path=output, filename=Path(filename).stem + '.wav', media_type='audio/wav')
+ '-ar', '44100',
